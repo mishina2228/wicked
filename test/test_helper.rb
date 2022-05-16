@@ -18,9 +18,9 @@ Capybara.default_selector = :css
 
 # https://github.com/plataformatec/devise/blob/master/test/orm/active_record.rb
 migrate_path = File.expand_path("../rails_app/db/migrate", __FILE__)
-if Rails.version.start_with? '6'
+if Gem::Version.new(Rails.version) >= Gem::Version.new('6.0.0')
   ActiveRecord::MigrationContext.new(migrate_path, ActiveRecord::SchemaMigration).migrate
-elsif Rails.version.start_with? '5.2'
+elsif Gem::Version.new(Rails.version) >= Gem::Version.new('5.2.0')
   ActiveRecord::MigrationContext.new(migrate_path).migrate
 else
   ActiveRecord::Migrator.migrate(migrate_path)
